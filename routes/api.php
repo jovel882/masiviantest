@@ -18,6 +18,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'tree'], function () {    
+    Route::get('/','TreeController@search')
+        ->name('tree_search');
+    Route::get('/all','TreeController@getAll')
+        ->name('tree_getAll');
+    Route::get('/{id}','TreeController@get')
+        ->where('id', '[0-9]+')
+        ->name('tree_get');
+    Route::post('/','TreeController@create')
+        ->name('tree_create');
+    Route::put('/{id}','TreeController@update')
+        ->where('id', '[0-9]+')
+        ->name('tree_update');
+    Route::delete('/{id}','TreeController@delete')
+        ->where('id', '[0-9]+')
+        ->name('tree_delete');
     Route::get('/{id}/lowestCommonAncestor','TreeController@lowestCommonAncestor')
         ->where('id', '[0-9]+')
         ->name('tree_lowestCommonAncestor');

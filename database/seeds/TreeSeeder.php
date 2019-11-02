@@ -13,7 +13,7 @@ class TreeSeeder extends Seeder
     public function run(){
         Tree::create([
             "name" => "Default",
-            "data" => json_encode([
+            "data" => [
                     67 => [
                         39 => [
                             28 => [
@@ -29,7 +29,7 @@ class TreeSeeder extends Seeder
                             ]
                         ]
                     ],
-            ])
+            ]
         ]);        
     }
 }
