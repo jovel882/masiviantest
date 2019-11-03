@@ -103,6 +103,23 @@ class NodeController extends Controller
             return response()->json(["errors"=>[__('api.errors.not_found.tree')]], 404);    
         } 
     }
+    public function delete(Request $req,Int $id,Int $node){
+        if($tree=$this->treedModel->getTreeById($id)){
+            $dataTree=$this->executeActionNode($tree->data,$node,false,"deleteNode");
+            if($dataTree==$tree->data){
+                return response()->json(["errors"=>[__('api.errors.not_found.node')]], 404);
+            }
+            if($tree=$this->treedModel->updateTreeNodes(["id"=> $id,"data" => (array)$dataTree])){
+                return response()->json(["message"=>__('api.message.delete_node',["node"=>$node])], 202);   
+            }
+            else{
+                return response()->json(["errors"=>[__('api.errors.delete_node')]], 500);    
+            }            
+        }
+        else{
+            return response()->json(["errors"=>[__('api.errors.not_found.tree')]], 404);    
+        } 
+    }
     private function executeActionNode($treeData,Int $idNode,Int $node,String $method){
         foreach($treeData as $key=>$data){
             if($key==$idNode){
@@ -150,6 +167,9 @@ class NodeController extends Controller
     }        
     private function updateNode(&$treeData,Int $idNode,Int $node){
         $treeData->{$node}=$treeData->{$idNode};
+        unset($treeData->{$idNode});        
+    }        
+    private function deleteNode(&$treeData,Int $idNode,Int $node){
         unset($treeData->{$idNode});        
     }        
 }

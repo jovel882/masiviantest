@@ -48,5 +48,8 @@ Route::group(['prefix' => 'tree'], function () {
         Route::put('/{node}','NodeController@update')
         ->where('node', '[0-9]+')
         ->name('tree_node_update');                
+        Route::delete('/{node}','NodeController@delete')
+        ->where('node', '[0-9]+')
+        ->name('tree_node_delete');                
     }); 
 });    
