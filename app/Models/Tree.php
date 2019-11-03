@@ -53,4 +53,11 @@ class Tree extends Model
         }        
         return $tree->get();
     }
+    public function updateTreeNodes($data){
+        try {
+            return self::findOrFail($data["id"])->fill($data)->save();
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return false;
+        }         
+    }    
 }
