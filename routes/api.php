@@ -45,5 +45,8 @@ Route::group(['prefix' => 'tree'], function () {
         Route::post('/{node}','NodeController@create')
         ->where('node', '[0-9]+')
         ->name('tree_node_create');                
+        Route::put('/{node}','NodeController@update')
+        ->where('node', '[0-9]+')
+        ->name('tree_node_update');                
     }); 
 });    

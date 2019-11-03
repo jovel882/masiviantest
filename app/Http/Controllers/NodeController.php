@@ -29,7 +29,6 @@ class NodeController extends Controller
             else{
                 return response()->json(["errors"=>[__('api.errors.insert_node_origin')]], 500);    
             }              
-            // dd($this->getNode($tree->data,$req->node,"create"));            
         }
         else{
             return response()->json(["errors"=>[__('api.errors.not_found.tree')]], 404);
@@ -72,6 +71,32 @@ class NodeController extends Controller
             }
             else{
                 return response()->json(["errors"=>[__('api.errors.insert_node')]], 500);    
+            }            
+        }
+        else{
+            return response()->json(["errors"=>[__('api.errors.not_found.tree')]], 404);    
+        } 
+    }
+    public function update(Request $req,Int $id,Int $node){
+        if($tree=$this->treedModel->getTreeById($id)){
+            $validation = \Validator::make($req->all(),[ 
+                'node' => 'required|integer',
+            ]);
+            if($validation->fails()){
+                return response()->json(["errors"=>$validation->errors()->toArray()], 412);    
+            }
+            if($this->getNode($tree->data,$req->node)){
+                return response()->json(["errors"=>[__('api.errors.duplicate_node',["node"=>$req->node])]], 404);
+            }             
+            $dataTree=$this->executeActionNode($tree->data,$node,$req->node,"updateNode");
+            if($dataTree==$tree->data){
+                return response()->json(["errors"=>[__('api.errors.not_found.node')]], 404);
+            }
+            if($tree=$this->treedModel->updateTreeNodes(["id"=> $id,"data" => (array)$dataTree])){
+                return response()->json(["message"=>__('api.message.update_node',["node"=>$req->node,"node2"=>$node])], 202);   
+            }
+            else{
+                return response()->json(["errors"=>[__('api.errors.update_node')]], 500);    
             }            
         }
         else{
@@ -122,5 +147,9 @@ class NodeController extends Controller
                 $treeData->{$idNode}->{$node}=false;
             }
         }
+    }        
+    private function updateNode(&$treeData,Int $idNode,Int $node){
+        $treeData->{$node}=$treeData->{$idNode};
+        unset($treeData->{$idNode});        
     }        
 }

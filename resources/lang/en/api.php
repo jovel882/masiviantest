@@ -18,6 +18,7 @@ return [
         'insert_node' => 'There was an error inserting the node. Try it again later; If it continues, contact the administrator.', 
         'duplicate_node' => 'Node :node already exists.', 
         'full_node' => 'Node :node is already complete.',
+        'update_node' => 'There was an error upgrated the node. Try it again later; If it continues, contact the administrator.', 
     ],
     'message' => [
         'update_tree' => 'Tree updated successfully.',
@@ -25,5 +26,6 @@ return [
         'create_origin' => 'The original node was created.',
         'empty_node' => 'Node empty.',
         'create_node' => 'Node :node was added to the node :node2 correctly.',
+        'update_node' => 'Node :node2 was updated to node :node correctly.',
     ]
 ];
