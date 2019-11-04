@@ -15,12 +15,12 @@ class TreeController extends Controller
     public function search(Request $req){
         $validation = \Validator::make($req->all(),[ 
             'name' => 'required',
-            'like' => 'required|boolean',
+            'any' => 'required|boolean',
         ]);
         if($validation->fails()){
             return response()->json(["errors"=>$validation->errors()->toArray()], 412);    
         }        
-        if($tree=$this->treedModel->searchTreeByName($req->name,$req->like)){
+        if($tree=$this->treedModel->searchTreeByName($req->name,$req->any)){
             return response()->json(["tree"=>$tree->toArray()], 200);   
         }
         else{
@@ -96,10 +96,10 @@ class TreeController extends Controller
             if($validation->fails()){
                 return response()->json(["errors"=>$validation->errors()->toArray()], 412);    
             }
-            $firstNode=array_key_first((array)$tree->data);
             if(!$tree->data){
                 return response()->json(["errors"=>[__('api.errors.empty')]], 406);
             }
+            $firstNode=array_key_first((array)$tree->data);
             $antecesorsFirst=[];
             if($firstNode!=$req->{"first-node"}){
                 $this->getAllAntecesors($tree->data,$req->{"first-node"},$antecesorsFirst);
