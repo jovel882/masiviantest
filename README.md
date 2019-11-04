@@ -1,71 +1,62 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Prueba de desarrollo arbol binario
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+_Prueba de desarrollo para Masivian._
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Pre-requisitos 📋
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+_Ambiente requerido_
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Php 7.2.0 con phpCli habilitado para la ejecucion de comando.
+- Mysql 5.7.19.
+- Composer 
 
-## Learning Laravel
+### Instalación 🔧
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clonar el repositorio en el folder del servidor web en uso, **este folder debe terner permisos para que php se pueda ejecutar por CLI y permisos de lectura y escritura para el archivo .env**.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost you and your team's skills by digging into our comprehensive video library.
+```sh 
+git clone https://github.com/jovel882/masiviantest.git 
+```
 
-## Laravel Sponsors
+2. Instalar paquetes ejecutando en la raiz del sitio.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```sh 
+composer install
+```
+3. Crear BD con COLLATE 'utf8mb4_general_ci', ejemplo.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
+```sh 
+`CREATE DATABASE masivian COLLATE 'utf8mb4_general_ci';`
+```
 
-## Contributing
+4. Duplique el archivo `.env.example` incluido en uno `.env` y dentro de este ingrese los valores de las variables de entorno necesarias, las basicas serian las referentes a BD:
+- `DB_HOST="value"` Variable de entorno para el host de BD.
+- `DB_PORT="value"` Variable de entorno para el puerto de BD.
+- `DB_DATABASE="value"` Variable de entorno para el nombre de BD.
+- `DB_USERNAME="value"` Variable de entorno para el usuario de BD.
+- `DB_PASSWORD="value"` Variable de entorno para la contraseña de BD.
+5. En la raiz del sitio ejecutar.
+- `php artisan key:generate && php artisan config:cache` Genera la llave para la encripcion de proyecto y refresca las configuracions.
+- `php artisan migrate` Crea la estructura de BD. 
+- `php artisan db:seed` Carga los datos de ejemplo, en este caso el arbol inicial enviado en la prueba.
+- `php artisan serve` Arranca el servidor web.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+##### Nota: 
+Si desea puede ejecutar todos los comandos anteriores juntos si ejecuta 
+```sh
+php artisan key:generate && php artisan config:cache && php artisan migrate && php artisan db:seed && php artisan serve
+```
+6. En la raiz del sitio usar este comando si se desea ejecutar las pruebas.
+```sh 
+vendor/bin/phpunit
+```
+## Funciones ⚙️
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Autor ✒️ 
 
-## License
+* **John Fredy Velasco Bareño** [jovel882@gmail.com](mailto:jovel882@gmail.com)
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+------------------------
