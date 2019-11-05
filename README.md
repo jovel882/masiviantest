@@ -68,6 +68,16 @@ POST| api/tree/__{id}__/node/__{node}__| Crear nodo.| Crea el nodo como hijo del
 PUT| api/tree/__{id}__/node/__{node}__| Actualiza nodo.| Actualiza el nodo especificado en la url del árbol especificado en la url como parámetro, estos deben ser numéricos y de acuerdo con los parámetros enviados.| __1. node__ (Requerido, numérico y no debe existir): Define el nodo nuevo.
 DELETE| api/tree/__{id}__/node/__{node}__| Eliminar nodo.| Elimina el nodo especificado en la url del árbol especificado en la url como parámetro, estos deben ser numéricos.| N/A
 
+## 💻 Despliegue en Heroku
+Se realizó un despliegue en Heroku bajo el siguiente End Point:
+`https://masiviantest.herokuapp.com/`
+
+Con este, por ejemplo, para realizar la búsqueda del ancestro común más cercano se puede consultar de la siguiente manera:
+`https://masiviantest.herokuapp.com/api/tree/1/lowestCommonAncestor?first-node=44&second-node=85`
+
+##### - Nota:
+Al no tener costo este espacio en Heroku los tiempos de respuesta no son tan óptimos.
+
 #### 🔗  [Url Postman](https://www.getpostman.com/collections/4f9ca96fb6fa080d7cbe):
 En este [enlace](https://www.getpostman.com/collections/4f9ca96fb6fa080d7cbe) se encuentra un json con los request de ejemplo para ser usados en postman.
 
