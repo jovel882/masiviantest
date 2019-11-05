@@ -135,7 +135,7 @@ class TreeController extends Controller
             return response()->json(["errors"=>[__('api.errors.not_found.tree')]], 404);    
         }
     }
-    private function getAllAntecesors($treeData,Int $idSearch,array &$antecesors){
+    public function getAllAntecesors($treeData,Int $idSearch,array &$antecesors){
         foreach($treeData as $key=>$data){
             if($key==$idSearch){
                 return true;
