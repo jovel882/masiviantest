@@ -120,7 +120,7 @@ class NodeController extends Controller
             return response()->json(["errors"=>[__('api.errors.not_found.tree')]], 404);    
         } 
     }
-    private function executeActionNode($treeData,Int $idNode,Int $node,String $method){
+    public function executeActionNode($treeData,Int $idNode,Int $node,String $method){
         foreach($treeData as $key=>$data){
             if($key==$idNode){
                 $this->$method($treeData,$key,$node);
@@ -139,7 +139,7 @@ class NodeController extends Controller
         }
         return $treeData;
     }              
-    private function getNode($treeData,Int $node){
+    public function getNode($treeData,Int $node){
         foreach($treeData as $key=>$data){
             if($key==$node){
                 return (!$data)?__('api.message.empty_node'):$data;
@@ -152,7 +152,7 @@ class NodeController extends Controller
         }
         return false;
     }
-    private function createNode(&$treeData,Int $idNode,Int $node){
+    public function createNode(&$treeData,Int $idNode,Int $node){
         if($treeData->{$idNode} && count((array)$treeData->{$idNode})==2){
             $treeData = json_decode('{"errors":"'.__('api.errors.full_node',["node"=>$idNode]).'"}');
         }
@@ -165,11 +165,11 @@ class NodeController extends Controller
             }
         }
     }        
-    private function updateNode(&$treeData,Int $idNode,Int $node){
+    public function updateNode(&$treeData,Int $idNode,Int $node){
         $treeData->{$node}=$treeData->{$idNode};
         unset($treeData->{$idNode});        
     }        
-    private function deleteNode(&$treeData,Int $idNode,Int $node){
+    public function deleteNode(&$treeData,Int $idNode,Int $node){
         unset($treeData->{$idNode});        
     }        
 }
